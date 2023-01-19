@@ -1,6 +1,6 @@
 <script>
 export default {
-    name: AppLoader
+    name: 'AppLoader'
 }
 </script>
 
