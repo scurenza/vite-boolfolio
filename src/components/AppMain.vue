@@ -2,13 +2,14 @@
 import axios from 'axios';
 import AppLoader from './AppLoader.vue';
 import ProjectCard from './ProjectCard.vue';
+import { store } from '../store';
 
 export default {
     name: 'AppMain',
     components: {  ProjectCard, AppLoader },
     data() {
         return {
-            baseUrl : "http://127.0.0.1:8000",
+            store,
             projects: [],
             loading: false
         };
@@ -19,7 +20,7 @@ export default {
     methods: {
         getProjects() {
             this.loading = true;
-            axios.get(`${this.baseUrl}/api/projects`).then(resp => {
+            axios.get(`${this.store.apiBaseUrl}/api/projects`).then(resp => {
                 this.projects = resp.data.results;
                 this.loading = false;
             });

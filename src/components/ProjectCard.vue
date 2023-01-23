@@ -1,10 +1,12 @@
 <script>
+import { store } from '../store';
+
 export default {
     name: 'ProjectCard',
     data() {
         return {
             contentMaxLength: 100,
-            baseUrl: "http://127.0.0.1:8000",
+            store,
         }
     },
     props: {
@@ -34,7 +36,7 @@ export default {
         <div class="card-body">
             <div class="row justify-content-between">
                 <div class="col-4">
-                    <img v-if="project.cover_image" class="w-100" :src="`${baseUrl}/storage/${project.cover_image}`" alt="">
+                    <img v-if="project.cover_image" class="w-100" :src="`${this.store.apiBaseUrl}/storage/${project.cover_image}`" alt="">
                     <div v-else>
                         Nessuna immagine
                     </div>
@@ -43,7 +45,8 @@ export default {
                     <h3 class="card-title">{{ project.title }}</h3>
                     <div class="d-flex justify-content-between">
                         <p>
-                            <span v-for="technology in project.technologies" :key="technology.id">#{{ technology.name }} </span>
+                            <span v-for="technology in project.technologies" :key="technology.id"> #{{ technology.name }} </span>
+
                         </p>
                         <p class="text-end text-success">{{ project.type ? project.type.name : 'Nessuna tipologia' }}
                         </p>
